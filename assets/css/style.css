@@ -1,0 +1,28 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+main {
+  text-align: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px auto;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+button {
+  color: white;
+  background-color: blueviolet;
+  border-radius: 5px;
+}
