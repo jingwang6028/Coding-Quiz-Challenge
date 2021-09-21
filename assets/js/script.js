@@ -59,7 +59,7 @@ var answer4 = document.querySelector("#answer4");
 var singleQuestion;
 var singleQuestionIndex = 0;
 var secondLeft = 60;
-var score;
+var score = 0;
 var correctAnswer;
 var clickAnswer;
 
@@ -73,7 +73,7 @@ function startGame() {
   quizContainerEl.classList.remove("hide");
 
   timeLeft();
-  displayQuestion();
+  //displayQuestion();
   checkAnswer();
 }
 
@@ -97,14 +97,17 @@ function checkAnswer() {
   displayQuestion();
   correctAnswer = singleQuestion.answer;
   clickAnswer = event.target.textContent;
-
-  if (clickAnswer === correctAnswer) {
-    score = secondLeft;
-  } else if (singleQuestionIndex === 5) {
-    gameEnd();
+  // when click the last question, always show mistake
+  if (singleQuestionIndex < questionArray.length) {
+    if (clickAnswer === correctAnswer) {
+      score = secondLeft;
+    } else {
+      score = secondLeft - 10;
+    }
   } else {
-    score -= 10;
+    gameEnd(); //TODO: can not end game
   }
+
   singleQuestionIndex++;
 
   console.log(clickAnswer);
@@ -145,6 +148,7 @@ function checkAnswer() {
 // }
 
 // set time left function
+
 function timeLeft() {
   var timeInterval = setInterval(function () {
     secondLeft--;
