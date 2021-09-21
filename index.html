@@ -12,15 +12,45 @@
 <body>
     <header>
         <p><a class='highscore' href="#">View Highscores</a> </p>
-        <p>Time: <span class='time'>0</span></p>
+        <p>Time: <span class='timeLeft'>0</span></p>
     </header>
     <main>
-        <h1>
-            Coding Quiz Challenge
-        </h1>
-        <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answer
-            will penalize your score/time by ten seconds!</p>
-        <button>Start Quiz</button>
+        <section class="info-container">
+            <h1>
+                Coding Quiz Challenge
+            </h1>
+            <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect
+                answer
+                will penalize your score/time by ten seconds!</p>
+            <button class="startBtn">Start Quiz</button>
+        </section>
+
+        <section class="quiz-container hide">
+            <div class="questionTitle">Title</div>
+            <div class="answersBtn">
+                <button id="answer1" class="btn">answer1</button>
+                <button id="answer2" class="btn">answer2</button>
+                <button id="answer3" class="btn">answer3</button>
+                <button id="answer4" class="btn">answer4</button>
+            </div>
+            <div>
+                <hr>
+                <span class="correct"></span>
+
+            </div>
+
+        </section>
+
+        <section class="score-container hide">
+            <h1>All Done!</h1>
+            <p>Your final score is <span class="finalScore">0</span>.</p>
+            <form action="">
+                <label for="initial">Enter initials:</label>
+                <input type="text">
+                <button>Submit</button>
+            </form>
+        </section>
+
     </main>
 
 
