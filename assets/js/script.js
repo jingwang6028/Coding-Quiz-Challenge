@@ -98,21 +98,27 @@ function checkAnswer() {
   correctAnswer = singleQuestion.answer;
   clickAnswer = event.target.textContent;
   // when click the last question, always show mistake
-  if (singleQuestionIndex < questionArray.length) {
+
+  if (singleQuestionIndex === questionArray.length - 1) {
     if (clickAnswer === correctAnswer) {
       score = secondLeft;
     } else {
       score = secondLeft - 10;
     }
-  } else {
     gameEnd(); //TODO: can not end game
+  } else if (singleQuestionIndex < questionArray.length) {
+    if (clickAnswer === correctAnswer) {
+      score = secondLeft;
+    } else {
+      score = secondLeft - 10;
+    }
+    singleQuestionIndex++;
   }
-
-  singleQuestionIndex++;
-
-  console.log(clickAnswer);
-  console.log(correctAnswer);
-  console.log(score);
+  //displayQuestion();
+  // console.log(clickAnswer);
+  // console.log(correctAnswer);
+  // console.log(score);
+  console.log(singleQuestionIndex);
 }
 
 //   if (clickAnswer === correctAnswer) {
@@ -148,7 +154,7 @@ function checkAnswer() {
 // }
 
 // set time left function
-
+// TODO: right corner timeEL.content not change
 function timeLeft() {
   var timeInterval = setInterval(function () {
     secondLeft--;
