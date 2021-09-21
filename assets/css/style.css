@@ -27,7 +27,8 @@ h1 {
 }
 
 .startBtn,
-.btn {
+.btn,
+.endBtn {
   color: white;
   background-color: blueviolet;
   border-radius: 5px;
