@@ -117,6 +117,7 @@ for (var i = 0; i < answerBtn.length; i++) {
 
 function checkAnswer() {
   displayQuestion();
+
   correctAnswer = singleQuestion.answer;
   clickAnswer = event.target.textContent;
 
@@ -134,7 +135,7 @@ function checkAnswer() {
   }
   // console.log(clickAnswer);
   // console.log(correctAnswer);
-  // console.log(score);
+  //console.log(score);
 }
 
 function timeLeft() {
@@ -153,7 +154,8 @@ function timeLeft() {
 
 endBtnEl.addEventListener("click", gameEnd);
 //end of game when final score section display
-function gameEnd() {
+function gameEnd(event) {
+  event.preventDefault();
   quizContainerEl.classList.add("hide");
   scoreContainerEl.classList.remove("hide");
 
@@ -165,5 +167,5 @@ function gameEnd() {
   localStorage.setItem("userInitial", initialInput);
   localStorage.setItem("lastScore", lastScore);
 
-  //window.location.replace("./highScore.html");
+  window.location.replace("./highScore.html");
 }
