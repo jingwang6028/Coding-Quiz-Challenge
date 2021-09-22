@@ -40,6 +40,27 @@ var questionArray = [
     ],
     answer: "break statement",
   },
+  {
+    qsTitle:
+      "String values must be enclosed within _____ when being assigned to variables.",
+    choices: ["commas", "curly brackets", "quotes", "parenthesis"],
+    answer: "quotes",
+  },
+  {
+    qsTitle: "The first index of an array is ____.",
+    choices: ["0", "1", "8", "any"],
+    answer: "0",
+  },
+  {
+    qsTitle: "How do you add a comment in a JavaScript?",
+    choices: [
+      "//This is a comment",
+      "<!--This is a comment-->",
+      "'This is a comment",
+      "* This is a comment *",
+    ],
+    answer: "//This is a comment",
+  },
 ];
 
 var infoEl = document.querySelector(".info-container");
@@ -51,14 +72,16 @@ var correctOrWrong = document.querySelector(".correct");
 var finalScore = document.querySelector(".finalScore");
 var startBtn = document.querySelector(".startBtn");
 var answerBtn = document.querySelectorAll(".btn");
+var initialEl = document.querySelector("#initial");
 var answer1 = document.querySelector("#answer1");
 var answer2 = document.querySelector("#answer2");
 var answer3 = document.querySelector("#answer3");
 var answer4 = document.querySelector("#answer4");
+var endBtnEl = document.querySelector("#endBtn");
 
 var singleQuestion;
 var singleQuestionIndex = 0;
-var secondLeft = 60;
+var secondLeft = 50;
 var score = 0;
 var correctAnswer;
 var clickAnswer;
@@ -73,7 +96,6 @@ function startGame() {
   quizContainerEl.classList.remove("hide");
 
   timeLeft();
-  //displayQuestion();
   checkAnswer();
 }
 
@@ -97,64 +119,24 @@ function checkAnswer() {
   displayQuestion();
   correctAnswer = singleQuestion.answer;
   clickAnswer = event.target.textContent;
-  // when click the last question, always show mistake
 
-  if (singleQuestionIndex === questionArray.length - 1) {
-    if (clickAnswer === correctAnswer) {
-      score = secondLeft;
-    } else {
-      score = secondLeft - 10;
-    }
-    gameEnd(); //TODO: can not end game
-  } else if (singleQuestionIndex < questionArray.length) {
-    if (clickAnswer === correctAnswer) {
-      score = secondLeft;
-    } else {
-      score = secondLeft - 10;
-    }
-    singleQuestionIndex++;
+  if (clickAnswer === correctAnswer) {
+    score = secondLeft;
+  } else {
+    score = secondLeft - 10;
   }
-  //displayQuestion();
+
+  singleQuestionIndex++;
+  //after last question, see score and sign initial
+  if (singleQuestionIndex === questionArray.length) {
+    quizContainerEl.classList.add("hide");
+    scoreContainerEl.classList.remove("hide");
+  }
   // console.log(clickAnswer);
   // console.log(correctAnswer);
   // console.log(score);
-  console.log(singleQuestionIndex);
 }
 
-//   if (clickAnswer === correctAnswer) {
-//     score = secondLeft;
-
-//     if (singleQuestionIndex === questionArray.length) {
-//       gameEnd();
-//     } else {
-//       displayQuestion();
-//       singleQuestionIndex++;
-//     }
-
-//     // if click answer is wrong
-//   } else {
-//     // score = secondLeft - 10;
-//     // timeEl.textContent = score;
-//     singleQuestionIndex++;
-//     if (score < 10) {
-//       score -= 10;
-//       gameEnd();
-//       //user on the last question
-//     } else if (singleQuestionIndex === 5) {
-//       gameEnd();
-//     } else {
-//       score -= 10;
-//       displayQuestion();
-//     }
-//   }
-
-//   console.log(clickAnswer);
-//   console.log(correctAnswer);
-//   console.log(score);
-// }
-
-// set time left function
-// TODO: right corner timeEL.content not change
 function timeLeft() {
   var timeInterval = setInterval(function () {
     secondLeft--;
@@ -162,15 +144,26 @@ function timeLeft() {
 
     if (secondLeft === 0) {
       clearInterval(timeInterval);
-      gameEnd();
+      //gameEnd();
+      quizContainerEl.classList.add("hide");
+      scoreContainerEl.classList.remove("hide");
     }
   }, 1000);
 }
 
+endBtnEl.addEventListener("click", gameEnd);
 //end of game when final score section display
 function gameEnd() {
   quizContainerEl.classList.add("hide");
   scoreContainerEl.classList.remove("hide");
 
   finalScore.textContent = score;
+  var initialInput = initialEl.value;
+  var lastScore = score;
+  console.log(initialInput);
+  console.log(lastScore);
+  localStorage.setItem("userInitial", initialInput);
+  localStorage.setItem("lastScore", lastScore);
+
+  //window.location.replace("./highScore.html");
 }
