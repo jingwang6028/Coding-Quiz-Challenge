@@ -69,7 +69,7 @@ var scoreContainerEl = document.querySelector(".score-container");
 var questionTitle = document.querySelector(".questionTitle");
 var timeEl = document.querySelector(".timeLeft");
 var correctOrWrong = document.querySelector(".correct");
-var finalScore = document.querySelector(".finalScore");
+var finalScoreEl = document.querySelector("#finalScore");
 var startBtn = document.querySelector(".startBtn");
 var answerBtn = document.querySelectorAll(".btn");
 var initialEl = document.querySelector("#initial");
@@ -136,6 +136,7 @@ function checkAnswer() {
   // console.log(clickAnswer);
   // console.log(correctAnswer);
   //console.log(score);
+  finalScoreEl.textContent = score;
 }
 
 function timeLeft() {
@@ -159,11 +160,9 @@ function gameEnd(event) {
   quizContainerEl.classList.add("hide");
   scoreContainerEl.classList.remove("hide");
 
-  finalScore.textContent = score;
   var initialInput = initialEl.value;
   var lastScore = score;
-  console.log(initialInput);
-  console.log(lastScore);
+
   localStorage.setItem("userInitial", initialInput);
   localStorage.setItem("lastScore", lastScore);
 
